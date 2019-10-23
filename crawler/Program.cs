@@ -4,6 +4,7 @@ using System.Net.Http;
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace crawler
 {
@@ -23,7 +24,7 @@ namespace crawler
             //get team names
             var nameNodes = pageDocument.DocumentNode.SelectNodes("(//span[contains(@class,'team-template-text')])//a");
             List<string> teamNamesList = new List<string>();
-            List<string> teamDpcList = new List<string>();
+            List<float> teamDpcList = new List<float>();
 
             //add team names to list
             foreach (var node in nameNodes)
@@ -37,7 +38,9 @@ namespace crawler
             {
                 if (i%2!=0)
                 {
-                    teamDpcList.Add(valueNodes[i].InnerHtml);
+
+                    //Console.WriteLine($"tip je : { float.Parse(valueNodes[i].InnerHtml) is float }");
+                    teamDpcList.Add(float.Parse(valueNodes[i].InnerHtml, CultureInfo.InvariantCulture.NumberFormat));
                 }
             }
 
