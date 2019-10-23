@@ -41,9 +41,6 @@ namespace crawler
                 }
             }
 
-
-
-
             //merge to dictionary
             var dictionary = teamNamesList.Zip(teamDpcList, (k, v) => new { Key = k, Value = v })
                 .ToDictionary(x => x.Key, x => x.Value);
